@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:takshashila.org.in)",
+      "WebSearch",
+      "WebFetch(domain:old.takshashila.org.in)",
+      "WebFetch(domain:legion.takshashila.org.in)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack)",
+      "Read(//c/Users/ashwn/Documents/Coding Projects/**)",
+      "Bash(npx create-next-app@latest drishti-temp --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-turbopack)",
+      "Bash(cp 'C:\\\\Users\\\\ashwn\\\\Documents\\\\Coding Projects\\\\drishti-temp/__TRACKED_VAR__' 'C:\\\\Users\\\\ashwn\\\\Documents\\\\Coding Projects\\\\Drishti - India Defence Futures Project/__TRACKED_VAR__')",
+      "Bash(cp -r 'C:\\\\Users\\\\ashwn\\\\Documents\\\\Coding Projects\\\\drishti-temp/public' 'C:\\\\Users\\\\ashwn\\\\Documents\\\\Coding Projects\\\\Drishti - India Defence Futures Project/public')",
+      "Bash(cp -r 'C:\\\\Users\\\\ashwn\\\\Documents\\\\Coding Projects\\\\drishti-temp/src' 'C:\\\\Users\\\\ashwn\\\\Documents\\\\Coding Projects\\\\Drishti - India Defence Futures Project/src')",
+      "Bash(npm install *)",
+      "Skill(update-config)",
+      "Bash(npx shadcn@latest init --defaults)"
+    ]
+  }
+}
