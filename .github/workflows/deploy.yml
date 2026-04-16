@@ -28,6 +28,12 @@ jobs:
 
       - run: npm run build
 
+      - name: Rename _next to next (GitHub Pages blocks underscore directories)
+        run: |
+          mv out/_next out/next
+          find out -type f \( -name "*.html" -o -name "*.js" -o -name "*.css" -o -name "*.txt" \) \
+            -exec sed -i 's|/drishti/_next/|/drishti/next/|g' {} +
+
       - run: touch out/.nojekyll
 
       - uses: actions/upload-pages-artifact@v3
