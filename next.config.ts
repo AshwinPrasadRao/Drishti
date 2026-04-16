@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   output: "export",
   basePath: "/drishti",
   assetPrefix: "/drishti/",
+  trailingSlash: true,
 };
 
 export default nextConfig;
