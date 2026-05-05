@@ -21,11 +21,15 @@
   --border-default: rgba(255,255,255,0.10);
   --border-strong:  rgba(255,255,255,0.18);
 
-  /* Text */
-  --text-primary:   #ededed;   /* headings, important values */
-  --text-secondary: #999999;   /* labels, metadata */
-  --text-tertiary:  #555555;   /* placeholders, very muted */
-  --text-disabled:  #383838;
+  /* Text — contrast ratios on #0d0d0d:
+       primary   #f2f2f2 ≈ 16:1
+       secondary #c4c4c4 ≈ 10:1
+       tertiary  #9a9a9a ≈ 6.0:1  (WCAG AA for small body)
+       disabled  #6b6b6b ≈ 3.4:1  (still readable for non-essential) */
+  --text-primary:   #f2f2f2;
+  --text-secondary: #c4c4c4;
+  --text-tertiary:  #9a9a9a;
+  --text-disabled:  #6b6b6b;
 
   /* Brand (India saffron) */
   --brand:          #f97316;   /* orange-500 */
@@ -150,8 +154,17 @@
     text-rendering: optimizeLegibility;
     background: var(--bg-base);
     color: var(--text-primary);
-    font-size: 15px;
-    line-height: 1.55;
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+
+  /* Make small UI text readable: nudge tracking and weight at small sizes
+     where Inter's stems get thin on dark backgrounds. */
+  .text-xs,
+  .text-\[11px\],
+  .text-\[10px\] {
+    letter-spacing: 0.005em;
+    font-weight: 450;
   }
 
   h1, h2, h3, h4, h5, h6 {

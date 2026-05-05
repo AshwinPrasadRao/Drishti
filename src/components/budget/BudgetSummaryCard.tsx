@@ -14,7 +14,7 @@ function StatItem({ label, value, sub, accent }: { label: string; value: string;
     <div>
       <p className="text-[var(--text-tertiary)] text-xs mb-0.5">{label}</p>
       <p className={`font-semibold text-sm tabular-nums ${accent ?? 'text-[var(--text-primary)]'}`}>{value}</p>
-      {sub && <p className="text-[var(--text-tertiary)] text-[10px] mt-0.5 tabular-nums">{sub}</p>}
+      {sub && <p className="text-[var(--text-tertiary)] text-xs mt-0.5 tabular-nums">{sub}</p>}
     </div>
   );
 }
@@ -70,7 +70,7 @@ export function BudgetSummaryCard({ budget }: { budget: BudgetOutput }) {
       </div>
 
       <div className="mt-5 pt-4 border-t border-[var(--border-subtle)]">
-        <p className="text-[var(--text-tertiary)] text-[11px] leading-relaxed">
+        <p className="text-[var(--text-tertiary)] text-xs leading-relaxed">
           <span className="text-[var(--text-secondary)]">The capex squeeze:</span> personnel pay and pensions
           account for an average <span className="text-[var(--text-primary)] font-medium">
           {(100 * totals.totalPersonnelCrore / totals.totalOutlayCrore).toFixed(0)}%</span> of every defence rupee

@@ -30,7 +30,7 @@ export default function BudgetPage() {
       <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-5">
         <div className="flex items-baseline justify-between mb-4">
           <h3 className="section-title">Annual Defence Outlay 2026–2047</h3>
-          <p className="text-[var(--text-tertiary)] text-[11px]">
+          <p className="text-[var(--text-tertiary)] text-xs">
             Stacked bars · ₹ Cr · dashed line tracks % of GDP (right axis)
           </p>
         </div>
