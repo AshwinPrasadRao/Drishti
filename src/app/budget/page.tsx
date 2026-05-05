@@ -97,7 +97,7 @@ export default function BudgetPage() {
             Base FY2025-26 ≈ ₹4.85 lakh Cr. Real growth 1.0%/yr (pay) and 3.0%/yr (pension), with one-off uplifts
             of 12% / 11% / 10% in FY2027-28, FY2037-38 and FY2047-48 representing 8th, 9th and 10th Pay Commissions.
           </li>
-          <li>GDP path: 11.5% nominal growth (≈6.5% real + 5% inflation). All currency values are constant 2024 ₹ Crore.</li>
+          <li>GDP path: 6.5% real growth (constant 2024 ₹). All currency values are constant 2024 ₹ Crore.</li>
         </ul>
       </div>
     </div>

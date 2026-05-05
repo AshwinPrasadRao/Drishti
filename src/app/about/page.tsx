@@ -25,7 +25,7 @@ export default function AboutPage() {
           {[
             ['IISS Military Balance 2024/25', 'Primary source for current inventory quantities for all three services.'],
             ['Ministry of Defence Annual Reports', 'Historical defence budgets, capital allocations, and procurement updates.'],
-            ['IMF World Economic Outlook (Apr 2024)', 'India GDP projections to 2029, extrapolated at 6.5% real / 11.5% nominal growth.'],
+            ['IMF World Economic Outlook (Apr 2024)', 'India GDP projections to 2029, extrapolated at 6.5% real growth (constant 2024 ₹, matching the rest of the engine).'],
             ['Takshashila Institution', '"Neither Guns nor Butter" (2022) for defence budget recommendations (2.5% GDP target). takshashila.org.in'],
             ['Indian Navy LTPP', 'Publicly cited fleet goals: 200+ ships by 2035, 24 submarines, carrier programme.'],
             ['SIPRI, Jane\'s, PIB', 'Unit cost estimates and contract value cross-checks.'],
