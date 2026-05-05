@@ -58,10 +58,9 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      {/* Disclaimer */}
-      <div className="p-4 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)]">
-        <p className="text-[var(--text-tertiary)] text-xs leading-relaxed">{INVENTORY_METADATA.disclaimer}</p>
-      </div>
+      <p className="text-[var(--text-tertiary)] text-xs leading-relaxed pt-2 border-t border-[var(--border-subtle)]">
+        {INVENTORY_METADATA.disclaimer}
+      </p>
     </div>
   );
 }

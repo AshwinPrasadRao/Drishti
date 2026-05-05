@@ -1,4 +1,6 @@
 'use client';
+import { useState } from 'react';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 import { runProjection } from '@/lib/projection-engine';
 import { BASELINE_PROJECTION } from '@/data/projections/baseline-projection';
 import { TAKSHASHILA_PROJECTION } from '@/data/projections/takshashila-projection';
@@ -16,6 +18,7 @@ const SCENARIO_BADGE: Record<string, string> = {
 };
 
 export default function ComparePage() {
+  const [tableOpen, setTableOpen] = useState(false);
   const results = PRESETS.map((p) => {
     const out = runProjection(p) as { config: typeof p; budgetOutput: BudgetOutput };
     return out;
@@ -50,40 +53,50 @@ export default function ComparePage() {
         ))}
       </div>
 
-      {/* Delta table */}
+      {/* Delta table — collapsed by default */}
       <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] overflow-hidden">
-        <div className="px-5 py-4 border-b border-[var(--border-subtle)]">
-          <h3 className="section-title">Year-by-Year Comparison</h3>
-        </div>
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-[var(--border-subtle)]">
-              <th className="text-left text-[var(--text-tertiary)] text-xs font-semibold uppercase tracking-wider p-4">Year</th>
-              <th className="text-right text-[var(--text-tertiary)] text-xs font-semibold uppercase tracking-wider p-4">Baseline</th>
-              <th className="text-right text-blue-400 text-xs font-semibold uppercase tracking-wider p-4">Takshashila</th>
-              <th className="text-right text-[var(--text-tertiary)] text-xs font-semibold uppercase tracking-wider p-4">Delta</th>
-            </tr>
-          </thead>
-          <tbody>
-            {results[0].budgetOutput.annualEntries.map((baseEntry, i) => {
-              const takEntry = results[1].budgetOutput.annualEntries[i];
-              const delta = takEntry.totalDefenceOutlay - baseEntry.totalDefenceOutlay;
-              return (
-                <tr
-                  key={baseEntry.year}
-                  className="border-b border-[var(--border-subtle)] last:border-0 hover:bg-[var(--bg-elevated)] transition-colors"
-                >
-                  <td className="p-4 text-[var(--text-secondary)] tabular-nums">{baseEntry.year}</td>
-                  <td className="p-4 text-right text-[var(--text-secondary)] tabular-nums">{formatCrore(baseEntry.totalDefenceOutlay)}</td>
-                  <td className="p-4 text-right text-blue-400 tabular-nums">{formatCrore(takEntry.totalDefenceOutlay)}</td>
-                  <td className={`p-4 text-right font-semibold tabular-nums ${delta >= 0 ? 'text-[var(--brand)]' : 'text-[var(--accent-green)]'}`}>
-                    {delta >= 0 ? '+' : ''}{formatCrore(delta)}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <button
+          onClick={() => setTableOpen((v) => !v)}
+          className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-[var(--bg-elevated)] transition-colors"
+          aria-expanded={tableOpen}
+        >
+          <span className="section-title">Year-by-year comparison</span>
+          <span className="flex items-center gap-2 text-[var(--text-tertiary)] text-xs">
+            22 rows
+            {tableOpen ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+          </span>
+        </button>
+        {tableOpen && (
+          <table className="w-full text-sm border-t border-[var(--border-subtle)]">
+            <thead>
+              <tr className="border-b border-[var(--border-subtle)]">
+                <th className="text-left text-[var(--text-tertiary)] text-xs font-semibold uppercase tracking-wider p-4">Year</th>
+                <th className="text-right text-[var(--text-tertiary)] text-xs font-semibold uppercase tracking-wider p-4">Baseline</th>
+                <th className="text-right text-blue-400 text-xs font-semibold uppercase tracking-wider p-4">Takshashila</th>
+                <th className="text-right text-[var(--text-tertiary)] text-xs font-semibold uppercase tracking-wider p-4">Delta</th>
+              </tr>
+            </thead>
+            <tbody>
+              {results[0].budgetOutput.annualEntries.map((baseEntry, i) => {
+                const takEntry = results[1].budgetOutput.annualEntries[i];
+                const delta = takEntry.totalDefenceOutlay - baseEntry.totalDefenceOutlay;
+                return (
+                  <tr
+                    key={baseEntry.year}
+                    className="border-b border-[var(--border-subtle)] last:border-0 hover:bg-[var(--bg-elevated)] transition-colors"
+                  >
+                    <td className="p-4 text-[var(--text-secondary)] tabular-nums">{baseEntry.year}</td>
+                    <td className="p-4 text-right text-[var(--text-secondary)] tabular-nums">{formatCrore(baseEntry.totalDefenceOutlay)}</td>
+                    <td className="p-4 text-right text-blue-400 tabular-nums">{formatCrore(takEntry.totalDefenceOutlay)}</td>
+                    <td className={`p-4 text-right font-semibold tabular-nums ${delta >= 0 ? 'text-[var(--brand)]' : 'text-[var(--accent-green)]'}`}>
+                      {delta >= 0 ? '+' : ''}{formatCrore(delta)}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

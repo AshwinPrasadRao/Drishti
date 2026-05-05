@@ -27,10 +27,12 @@ export function BudgetSummaryCard({ budget }: { budget: BudgetOutput }) {
   const peakPctGDP = peakEntry?.defenceAsPercentGDP;
   const capexPct = (totals.averageCapexShareOfOutlay * 100).toFixed(1);
 
+  const personnelShare = (100 * totals.totalPersonnelCrore / totals.totalOutlayCrore).toFixed(0);
+
   return (
     <div className="rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-5">
       <div className="flex items-center justify-between mb-4">
-        <p className="text-[var(--text-secondary)] text-xs font-medium uppercase tracking-wider">Budget 2026–2047</p>
+        <p className="text-[var(--text-secondary)] text-xs font-semibold uppercase tracking-wider">Budget 2026–2047</p>
         <Badge variant="outline" className={`text-xs ${f.badge}`}>
           {f.label}
         </Badge>
@@ -43,41 +45,27 @@ export function BudgetSummaryCard({ budget }: { budget: BudgetOutput }) {
           sub={`Avg ${totals.averageDefencePercentGDP.toFixed(2)}% of GDP`}
         />
         <StatItem
-          label="Peak year spend"
+          label="Peak year"
           value={formatCrore(totals.peakYearOutlay)}
           sub={`${totals.peakYear} · ${peakPctGDP?.toFixed(2) ?? '—'}% GDP`}
         />
         <StatItem
-          label="Procurement (capex)"
+          label="Procurement"
           value={formatCrore(totals.totalProcurementCrore)}
-          sub={`${capexPct}% of total outlay`}
+          sub={`${capexPct}% capex share`}
           accent="text-[var(--brand)]"
         />
         <StatItem
-          label="Personnel (pay + pension)"
+          label="Personnel"
           value={formatCrore(totals.totalPersonnelCrore)}
-          sub={`${(100 * totals.totalPersonnelCrore / totals.totalOutlayCrore).toFixed(1)}% of total outlay`}
+          sub={`${personnelShare}% of outlay`}
           accent="text-[var(--accent-yellow)]"
         />
-        <StatItem
-          label="Maintenance / O&M"
-          value={formatCrore(totals.totalMaintenanceCrore)}
-          accent="text-[var(--accent-blue)]"
-        />
-        <StatItem label="Avg annual outlay" value={formatCrore(totals.averageAnnualOutlay)} />
-        <StatItem label="Avg % GDP" value={`${totals.averageDefencePercentGDP.toFixed(2)}%`} />
-        <StatItem label="Avg capex share" value={`${capexPct}%`} />
       </div>
 
-      <div className="mt-5 pt-4 border-t border-[var(--border-subtle)]">
-        <p className="text-[var(--text-tertiary)] text-xs leading-relaxed">
-          <span className="text-[var(--text-secondary)]">The capex squeeze:</span> personnel pay and pensions
-          account for an average <span className="text-[var(--text-primary)] font-medium">
-          {(100 * totals.totalPersonnelCrore / totals.totalOutlayCrore).toFixed(0)}%</span> of every defence rupee
-          across 2026–2047, before a single platform is bought. Modelled with 8th, 9th and 10th Pay Commission
-          step-ups (2027, 2037, 2047).
-        </p>
-      </div>
+      <p className="mt-5 pt-4 border-t border-[var(--border-subtle)] text-[var(--text-tertiary)] text-xs leading-relaxed">
+        Pay + pensions claim <span className="text-[var(--text-primary)] font-semibold">{personnelShare}%</span> of every defence rupee on average — before a single platform is bought.
+      </p>
     </div>
   );
 }

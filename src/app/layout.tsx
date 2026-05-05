@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Lato, Lora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AppShell } from "@/components/layout/AppShell";
 
-const inter = Inter({
+// Lato — body / UI sans across the app.
+const lato = Lato({
   variable: "--font-sans-body",
   subsets: ["latin"],
   display: "swap",
-  axes: ["opsz"],
+  weight: ["400", "700", "900"],
 });
 
-const spaceGrotesk = Space_Grotesk({
+// Lora — reserved for *big* headings (page titles only). Everything smaller
+// stays in Lato to keep the UI calm and legible.
+const lora = Lora({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
@@ -43,7 +46,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased dark`}
+      className={`${lato.variable} ${lora.variable} ${jetbrainsMono.variable} h-full antialiased dark`}
     >
       <body className="h-full bg-background text-foreground font-sans">
         <TooltipProvider>
