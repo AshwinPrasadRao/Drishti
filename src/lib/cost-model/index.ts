@@ -3,6 +3,7 @@ import type { AnnualBudgetEntry, BudgetOutput } from '@/types/budget';
 import type { ProjectionSnapshot } from '@/types/projection';
 import { EQUIPMENT_BY_ID } from '@/data/baseline';
 import { GDP_BY_YEAR } from '@/data/gdp-projections';
+import { PERSONNEL_BY_YEAR } from '@/data/personnel-projection';
 import { PROJECTION_YEARS } from '@/lib/utils';
 
 export function computeBudget(
@@ -46,11 +47,23 @@ export function computeBudget(
       }
     }
 
-    const totalDefenceOutlay = procurementSpend + maintenanceSpend;
+    // Personnel — pay + pension with CPC step-ups baked in
+    const personnel = PERSONNEL_BY_YEAR[year];
+    const payCrore = personnel?.payCrore ?? 0;
+    const pensionCrore = personnel?.pensionCrore ?? 0;
+    const personnelCrore = personnel?.totalCrore ?? 0;
+
+    const totalDefenceOutlay = procurementSpend + maintenanceSpend + personnelCrore;
     const gdpEntry = GDP_BY_YEAR[year];
     const estimatedGDP = gdpEntry?.gdpCrore;
     const defenceAsPercentGDP = estimatedGDP
       ? (totalDefenceOutlay / estimatedGDP) * 100
+      : undefined;
+    const procurementAsPercentGDP = estimatedGDP
+      ? (procurementSpend / estimatedGDP) * 100
+      : undefined;
+    const capexShareOfOutlay = totalDefenceOutlay > 0
+      ? procurementSpend / totalDefenceOutlay
       : undefined;
 
     const capCrore = gdpCapPercent && estimatedGDP
@@ -66,9 +79,15 @@ export function computeBudget(
       procurementByService,
       maintenanceSpend,
       maintenanceByService,
+      payCrore,
+      pensionCrore,
+      personnelCrore,
+      cpcEffectiveThisYear: personnel?.cpcEffectiveThisYear,
       totalDefenceOutlay,
       estimatedGDP,
       defenceAsPercentGDP,
+      procurementAsPercentGDP,
+      capexShareOfOutlay,
       exceedsCapConstraint,
       shortfallCrore,
     };
@@ -76,10 +95,19 @@ export function computeBudget(
 
   const totalProcurementCrore = annualEntries.reduce((s, e) => s + e.procurementSpend, 0);
   const totalMaintenanceCrore = annualEntries.reduce((s, e) => s + e.maintenanceSpend, 0);
-  const totalOutlayCrore = totalProcurementCrore + totalMaintenanceCrore;
+  const totalPersonnelCrore = annualEntries.reduce((s, e) => s + e.personnelCrore, 0);
+  const totalOutlayCrore = totalProcurementCrore + totalMaintenanceCrore + totalPersonnelCrore;
   const peakEntry = annualEntries.reduce((a, b) =>
     a.totalDefenceOutlay > b.totalDefenceOutlay ? a : b
   );
+
+  const yearsWithGDP = annualEntries.filter((e) => e.defenceAsPercentGDP !== undefined);
+  const averageDefencePercentGDP = yearsWithGDP.length
+    ? yearsWithGDP.reduce((s, e) => s + (e.defenceAsPercentGDP ?? 0), 0) / yearsWithGDP.length
+    : 0;
+  const averageCapexShareOfOutlay = annualEntries.length
+    ? annualEntries.reduce((s, e) => s + (e.capexShareOfOutlay ?? 0), 0) / annualEntries.length
+    : 0;
 
   const stressedYears = annualEntries.filter((e) => e.exceedsCapConstraint).length;
   const feasibilityAssessment =
@@ -90,10 +118,13 @@ export function computeBudget(
     totals: {
       totalProcurementCrore,
       totalMaintenanceCrore,
+      totalPersonnelCrore,
       totalOutlayCrore,
       peakYearOutlay: peakEntry.totalDefenceOutlay,
       peakYear: peakEntry.year,
       averageAnnualOutlay: totalOutlayCrore / PROJECTION_YEARS.length,
+      averageDefencePercentGDP,
+      averageCapexShareOfOutlay,
     },
     feasibilityAssessment,
   };

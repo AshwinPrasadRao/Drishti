@@ -25,6 +25,9 @@ export const BASELINE_PROJECTION: ProjectionConfig = {
     { equipmentId: 'c17', targetQuantity2047: 11 },
     { equipmentId: 'c130j', targetQuantity2047: 12 },
     { equipmentId: 'heron_tp', targetQuantity2047: 30 },
+    { equipmentId: 'amca_mk2_6gen', targetQuantity2047: 0 }, // not pursued under baseline
+    { equipmentId: 'mq9b', targetQuantity2047: 31 }, // already FMS-contracted
+    { equipmentId: 'tapas_hale', targetQuantity2047: 0 },
     // Army
     { equipmentId: 't90', targetQuantity2047: 2121 }, // 1657 + 464 on order
     { equipmentId: 't72', targetQuantity2047: 0 }, // retired by 2040
@@ -46,6 +49,8 @@ export const BASELINE_PROJECTION: ProjectionConfig = {
     { equipmentId: 'delhi_class', targetQuantity2047: 0 },
     { equipmentId: 'shivalik_class', targetQuantity2047: 3 },
     { equipmentId: 'nilgiri_class', targetQuantity2047: 7 },
+    { equipmentId: 'project_17b', targetQuantity2047: 0 }, // baseline: not initiated
+    { equipmentId: 'project_75_alpha', targetQuantity2047: 2 }, // 2 SSNs already CCS-cleared
     { equipmentId: 'talwar_class', targetQuantity2047: 6 }, // Batch 3 + existing
     { equipmentId: 'kamorta_class', targetQuantity2047: 8 },
     { equipmentId: 'vela_class', targetQuantity2047: 6 },

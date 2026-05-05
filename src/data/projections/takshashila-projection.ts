@@ -38,6 +38,9 @@ export const TAKSHASHILA_PROJECTION: ProjectionConfig = {
     { equipmentId: 'c17', targetQuantity2047: 15 }, // expanded strategic airlift
     { equipmentId: 'c130j', targetQuantity2047: 18 },
     { equipmentId: 'heron_tp', targetQuantity2047: 60 }, // expanded UAV fleet
+    { equipmentId: 'amca_mk2_6gen', targetQuantity2047: 60 }, // 6th-gen induction late 2030s
+    { equipmentId: 'mq9b', targetQuantity2047: 31 }, // tri-service HALE — full FMS contract
+    { equipmentId: 'tapas_hale', targetQuantity2047: 30 }, // indigenous HALE complement
     // Army — rebalance: fewer T-72 replacements, more precision strike & lighter forces
     { equipmentId: 't90', targetQuantity2047: 2000 },
     { equipmentId: 't72', targetQuantity2047: 0 },
@@ -59,6 +62,8 @@ export const TAKSHASHILA_PROJECTION: ProjectionConfig = {
     { equipmentId: 'delhi_class', targetQuantity2047: 0 },
     { equipmentId: 'shivalik_class', targetQuantity2047: 3 },
     { equipmentId: 'nilgiri_class', targetQuantity2047: 7 },
+    { equipmentId: 'project_17b', targetQuantity2047: 8 }, // next-gen frigate class
+    { equipmentId: 'project_75_alpha', targetQuantity2047: 6 }, // indigenous SSN programme
     { equipmentId: 'talwar_class', targetQuantity2047: 6 },
     { equipmentId: 'kamorta_class', targetQuantity2047: 16 }, // P28A + P28B
     { equipmentId: 'vela_class', targetQuantity2047: 6 },
