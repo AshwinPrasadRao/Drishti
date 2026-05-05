@@ -46,7 +46,7 @@ export function BudgetAreaChart({ budget }: { budget: BudgetOutput }) {
         <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" vertical={false} />
         <XAxis
           dataKey="year"
-          tick={{ fill: '#777', fontSize: 11 }}
+          tick={{ fill: '#c4c4c4', fontSize: 12 }}
           tickLine={false}
           axisLine={false}
           interval={2}
@@ -54,7 +54,7 @@ export function BudgetAreaChart({ budget }: { budget: BudgetOutput }) {
         <YAxis
           yAxisId="left"
           tickFormatter={(v) => formatCrore(v)}
-          tick={{ fill: '#777', fontSize: 10 }}
+          tick={{ fill: '#c4c4c4', fontSize: 12 }}
           tickLine={false}
           axisLine={false}
           width={72}
@@ -63,7 +63,7 @@ export function BudgetAreaChart({ budget }: { budget: BudgetOutput }) {
           yAxisId="right"
           orientation="right"
           tickFormatter={(v) => `${v}%`}
-          tick={{ fill: '#777', fontSize: 10 }}
+          tick={{ fill: '#c4c4c4', fontSize: 12 }}
           tickLine={false}
           axisLine={false}
           width={42}
@@ -77,14 +77,14 @@ export function BudgetAreaChart({ budget }: { budget: BudgetOutput }) {
             fontSize: '12px',
           }}
           labelStyle={{ color: '#ededed', fontWeight: 600, marginBottom: '4px' }}
-          itemStyle={{ color: '#bbb' }}
+          itemStyle={{ color: '#e5e5e5' }}
           formatter={(value, name) => {
             if (name === '% GDP') return [`${value}%`, name];
             return [formatCrore(Number(value)), String(name)];
           }}
         />
         <Legend
-          wrapperStyle={{ color: '#999', fontSize: 11, paddingTop: '8px' }}
+          wrapperStyle={{ color: '#e5e5e5', fontSize: 12, paddingTop: '8px' }}
           iconType="circle"
           iconSize={6}
         />
@@ -136,7 +136,7 @@ export function BudgetAreaChart({ budget }: { budget: BudgetOutput }) {
             fill="#fbbf24"
             stroke="#0d0d0d"
             strokeWidth={1.5}
-            label={{ value: `${d.cpc}th CPC`, position: 'top', fill: '#fbbf24', fontSize: 10 }}
+            label={{ value: `${d.cpc}th CPC`, position: 'top', fill: '#fbbf24', fontSize: 12, fontWeight: 600 }}
           />
         ))}
       </ComposedChart>

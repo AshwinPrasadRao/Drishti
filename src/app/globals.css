@@ -158,13 +158,24 @@
     line-height: 1.6;
   }
 
-  /* Make small UI text readable: nudge tracking and weight at small sizes
-     where Inter's stems get thin on dark backgrounds. */
-  .text-xs,
-  .text-\[11px\],
-  .text-\[10px\] {
+  /* Override Tailwind's tiny defaults so nothing on the page renders below
+     ~13px. Inter's stems get spindly on dark backgrounds — bump weight and
+     tracking at small sizes to keep counters open. */
+  .text-xs {
+    font-size: 0.8125rem;   /* 13px instead of 12px */
+    line-height: 1.45;
     letter-spacing: 0.005em;
     font-weight: 450;
+  }
+  .text-\[11px\],
+  .text-\[10px\] {
+    font-size: 0.8125rem;
+    letter-spacing: 0.005em;
+    font-weight: 450;
+  }
+  .text-sm {
+    font-size: 0.9rem;       /* 14.4px instead of 14px */
+    line-height: 1.5;
   }
 
   h1, h2, h3, h4, h5, h6 {
